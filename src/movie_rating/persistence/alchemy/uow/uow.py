@@ -1,5 +1,7 @@
 from sqlalchemy.orm import sessionmaker
 
+from ..repo import AlchemyDirectorRepository, AlchemyGenreRepository, AlchemyMovieRepository, AlchemyRatingRepository
+
 from ...uow import UnitOfWork
 
 
@@ -11,6 +13,10 @@ class AlchemyUnitOfWork(UnitOfWork):
     def __enter__(self) -> UnitOfWork:
         if self.__ref == 0:
             self.__session = self.__session_factory()
+            self.director_repo = AlchemyDirectorRepository(self.__session)
+            self.genre_repo = AlchemyGenreRepository(self.__session)
+            self.movie_repo = AlchemyMovieRepository(self.__session)
+            self.rating_repo = AlchemyRatingRepository(self.__session)
 
         self.__ref += 1
 
