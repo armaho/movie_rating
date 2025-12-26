@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Optional
+from typing import Optional, List
 
 from .entity import Entity
 
@@ -11,3 +11,4 @@ class Genre(Entity):
 
     name: str
     description: Optional[str] = field(default=None)
+    movies: List["Movie"] = field(default_factory=list)
