@@ -20,18 +20,6 @@ mapper_registry.map_imperatively(
     directors_table,
 )
 
-genres_table = Table(
-    "genres",
-    metadata,
-    Column("id", Integer, primary_key=True),
-    Column("name", String(Genre.MAX_NAME_LEN), nullable=False),
-    Column("description", String(Genre.MAX_DESC_LEN), nullable=True),
-)
-mapper_registry.map_imperatively(
-    Genre,
-    genres_table,
-)
-
 movie_genre_table = Table(
     "movie_genre",
     metadata,
@@ -47,6 +35,25 @@ movie_genre_table = Table(
         ForeignKey("genres.id"),
         primary_key=True,
     ),
+)
+
+genres_table = Table(
+    "genres",
+    metadata,
+    Column("id", Integer, primary_key=True),
+    Column("name", String(Genre.MAX_NAME_LEN), nullable=False),
+    Column("description", String(Genre.MAX_DESC_LEN), nullable=True),
+)
+mapper_registry.map_imperatively(
+    Genre,
+    genres_table,
+    properties={
+        "movies": relationship(
+            Movie,
+            secondary=movie_genre_table,
+            back_populates="genres",
+        ),
+    },
 )
 
 movies_table = Table(
