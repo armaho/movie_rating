@@ -1,7 +1,6 @@
 from typing import Optional
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
-from urllib.parse import urlparse
 from pydantic import BaseModel, Field
 
 from ...persistence.model import Genre
