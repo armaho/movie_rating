@@ -7,6 +7,7 @@ from pydantic import BaseModel, Field
 
 from ...persistence.model import Movie
 from ...persistence.uow import get_uow
+from ...persistence.errors import EntityNotFoundError
 from ...service.movie_service import persist_movie
 from ...validation import InvalidEntityError
 
@@ -41,7 +42,9 @@ def create_movie(request: CreateMovieRequest):
 
     try:
         with get_uow() as uow:
-            persist_movie(movie, request.genres, uow)
+            for genre_id in request.genres:
+                movie.genres.append(uow.genre_repo.get(genre_id))
+            persist_movie(movie, uow)
             uow.commit()
             return CreateMovieSuccessResponse(id=movie.id)
 
@@ -50,6 +53,14 @@ def create_movie(request: CreateMovieRequest):
             status_code=422,
             content=CreateMovieFailureResponse(
                 message=str(iee)
+            ).model_dump()
+        )
+
+    except EntityNotFoundError as enfe:
+        return JSONResponse(
+            status_code=422,
+            content=CreateMovieFailureResponse(
+                message=str(enfe)
             ).model_dump()
         )
 
