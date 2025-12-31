@@ -13,7 +13,7 @@ class UpdateMovieRequest(BaseModel):
     title: str
     director_id: int
     release_year: int
-    genre_ids: List[int]  # changed from "genres" to "genre_ids" to match spec
+    genres: List[int]
 
 @router.post("/api/v1/movies/{movie_id}")
 def update_movie_api(request: UpdateMovieRequest, movie_id: int = Path(...)):
