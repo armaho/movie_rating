@@ -5,4 +5,5 @@ from .repo import Repository
 
 
 class RatingRepository(Repository[Rating], Protocol):
-    pass
+    def get_rating_count_for_movie(self, movie_id: int) -> int: ...
+    def get_rating_average_for_movie(self, movie_id: int) -> float: ...
