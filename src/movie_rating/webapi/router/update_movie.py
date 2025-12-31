@@ -15,7 +15,7 @@ class UpdateMovieRequest(BaseModel):
     release_year: int
     genres: List[int]
 
-@router.post("/api/v1/movies/{movie_id}")
+@router.put("/api/v1/movies/{movie_id}")
 def update_movie_api(request: UpdateMovieRequest, movie_id: int = Path(...)):
     try:
         with get_uow() as uow:
@@ -24,9 +24,11 @@ def update_movie_api(request: UpdateMovieRequest, movie_id: int = Path(...)):
                 title=request.title,
                 director_id=request.director_id,
                 release_year=request.release_year,
-                genres=request.genre_ids, 
+                genres=request.genres, 
                 uow=uow
             )
+            uow.commit()
+
             return {
                 "id": movie.id,
                 "title": movie.title,
