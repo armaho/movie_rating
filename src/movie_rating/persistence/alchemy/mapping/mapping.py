@@ -89,7 +89,7 @@ ratings_table = Table(
     Column(
         "movie_id",
         Integer,
-        ForeignKey("movies.id"),
+        ForeignKey("movies.id", ondelete="CASCADE"),
         nullable=False,
     ),
     Column("score", Integer, nullable=False),
