@@ -1,18 +1,20 @@
-version: "3.9"
-
 services:
-  postgres:
-    image: postgres:16
-    container_name: movie_rating_db
-    restart: always
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: movie_rating
     ports:
       - "5432:5432"
-    environment:
-      POSTGRES_USER: movie_user
-      POSTGRES_PASSWORD: movie_pass
-      POSTGRES_DB: movie_db
-    volumes:
-      - movie_pgdata:/var/lib/postgresql/data
 
-volumes:
-  movie_pgdata:
+  app:
+    build: .
+    depends_on:
+      - db
+    environment:
+      DB_URL: postgresql+psycopg2://admin:admin@db:5432/movie_rating
+      SERVER_PORT: 8080
+    ports:
+      - "8080:8080"
+
