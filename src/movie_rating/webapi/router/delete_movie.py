@@ -11,11 +11,11 @@ def remove_movie(movie_id: int = Path(...)):
     try:
         with get_uow() as uow:
             delete_movie(movie_id, uow)
+            uow.commit()
             
             return Response(status_code=204)
 
     except EntityNotFoundError as enfe:
-       
         return JSONResponse(
             status_code=404,
             content={"status": "failure", "message": str(enfe)}
