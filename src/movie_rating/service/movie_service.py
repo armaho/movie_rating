@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from ..persistence.model import Movie
 from ..persistence.uow import UnitOfWork
@@ -43,3 +43,20 @@ def update_movie(
 
         uow.commit()
         return movie
+
+def list_movies(
+    page: int,
+    page_size: int,
+    title: Optional[str],
+    release_year: Optional[int],
+    genre: Optional[int],
+    uow: UnitOfWork
+) -> tuple[list[Movie], int]:
+    movies, total_count = uow.movie_repo.list_movies(
+        page=page,
+        page_size=page_size,
+        title=title,
+        release_year=release_year,
+        genre_id=genre
+    )
+    return movies, total_count
