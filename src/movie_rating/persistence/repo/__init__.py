@@ -1,6 +1,9 @@
 from .repo import Repository
-from .url_repo import UrlRepository
+from .director_repo import DirectorRepository
+from .genre_repo import GenreRepository
+from .movie_repo import MovieRepository
+from .rating_repo import RatingRepository
 
 
-__all__ = ["Repository", "UrlRepository"]
+__all__ = ["Repository", "DirectorRepository", "GenreRepository", "MovieRepository", "RatingRepository"]
 
