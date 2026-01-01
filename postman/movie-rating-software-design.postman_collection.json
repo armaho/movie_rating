@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "79c6b9ff-ef6f-4d7e-b8ad-c6869061ad77",
+		"_postman_id": "406a4705-8842-4344-9857-e07b0ebd2cbb",
 		"name": "movie-rating-software-design",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "31828800"
@@ -199,7 +199,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"title\": \"The Godfather\",\n  \"director_id\": 3,\n  \"release_year\": 1972,\n  \"genres\": [1, 2]\n}",
+					"raw": "{\n  \"title\": \"The Godfather\",\n  \"director_id\": 1,\n  \"release_year\": 1972,\n  \"genres\": [1, 2]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -292,7 +292,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"score\": 10\n}",
+					"raw": "{\n  \"score\": 9\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -300,7 +300,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/movies/2/ratings",
+					"raw": "http://localhost:8080/api/v1/movies/1/ratings",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -310,7 +310,7 @@
 						"api",
 						"v1",
 						"movies",
-						"2",
+						"1",
 						"ratings"
 					]
 				}
@@ -376,6 +376,204 @@
 						"movies",
 						"1",
 						"ratings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-movie-by-id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"score\": 110\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/movies/2/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-movie-with-invalid-id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"score\": 110\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/movies/1000/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"1000",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete-movie-by-id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/movies/2/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete-movie-with-invalid-id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/movies/1000/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"1000",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put-movie",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \n    \"title\": \"The Godfather Updated\",  \n    \"director_id\": 2,  \n    \"release_year\": 1972,  \n    \"genres\": [1]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/movies/1/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put-movie-with-invalid-id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \n    \"title\": \"The Godfather Updated\",  \n    \"director_id\": 2,  \n    \"release_year\": 1972,  \n    \"genres\": [1]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/movies/10000/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"10000",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-movies-with-pagation",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"The Godfather\",\n  \"director_id\": 1,\n  \"release_year\": 1972,\n  \"genres\": [1, 2]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/movies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"movies"
 					]
 				}
 			},
